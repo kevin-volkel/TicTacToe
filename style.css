@@ -17,6 +17,7 @@ html{
 header{
     text-align: center;
     text-transform: uppercase;
+    font-size: 2rem;
 }
 
 /* Turn Info Styles */
@@ -38,10 +39,11 @@ header{
 }
 
 .square{
+    width: auto;
+    height: auto;
     border: 2px black solid;
     text-align: center;
-    height: 100%;
-    align-content: center;
+    font-size: 6.5rem;
 }
 
 .left{
@@ -55,6 +57,13 @@ header{
 }
 .bottom{
     border-bottom: none;
+}
+
+.on{
+    cursor: pointer;
+}
+.off{
+    cursor: default;
 }
 
 /* Win Styles */
