@@ -15,8 +15,34 @@
     <link rel='shortcut icon' href='' type='image/x-icon'>
 </head>
 <body>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
 
+    <header>
+        <h1>Tic-Tac-Toe</h1>
+    </header>
 
+    <h3 id="player">Player: </h3>
+    <h3 id="turn">Turn: </h3>
+
+    <div class="gameContainer">
+        <div id="11" class="square top left" onclick="markBox(11)"></div>
+        <div id="12" class="square top" onclick="markBox(12)"></div>
+        <div id="13" class="square top right" onclick="markBox(13)"></div>
+        <div id="21" class="square left" onclick="markBox(21)"></div>
+        <div id="22" class="square" onclick="markBox(22)"></div>
+        <div id="23" class="square right" onclick="markBox(23)"></div>
+        <div id="31" class="square bottom left" onclick="markBox(31)"></div>
+        <div id="32" class="square bottom" onclick="markBox(32)"></div>
+        <div id="33" class="square bottom right" onclick="markBox(33)"></div>
+    </div>
+
+    <p>WINS</p>
+
+    <div class="wins">
+        <p>X - </p>
+        <p>O - </p>
+    </div>
 
     <script src="script.js"></script>
 </body>

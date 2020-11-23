@@ -2,4 +2,68 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Anton', sans-serif;
+}
+
+html{
+    background-color: #dc3d2a;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg fill-opacity='0.96'%3E%3Cpolygon fill='%23b0552a' points='1600 160 0 460 0 350 1600 50'/%3E%3Cpolygon fill='%23846c2b' points='1600 260 0 560 0 450 1600 150'/%3E%3Cpolygon fill='%2358842b' points='1600 360 0 660 0 550 1600 250'/%3E%3Cpolygon fill='%232c9b2c' points='1600 460 0 760 0 650 1600 350'/%3E%3Cpolygon fill='%2300b32c' points='1600 800 0 800 0 750 1600 450'/%3E%3C/g%3E%3C/svg%3E");
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+/* Header Styles */
+
+header{
+    text-align: center;
+    text-transform: uppercase;
+}
+
+/* Turn Info Styles */
+
+#player, #turn{
+    text-align: center;
+}
+
+/* Game Board Styles */
+
+.gameContainer{
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: repeat(3, 150px);
+    grid-template-rows: repeat(3, 150px);
+    width: fit-content;
+    background-color: rgba(0, 0, 0, 10%);
+    border-radius: 10%;
+}
+
+.square{
+    border: 2px black solid;
+    text-align: center;
+    height: 100%;
+    align-content: center;
+}
+
+.left{
+    border-left: none;
+}
+.top{
+    border-top: none;
+}
+.right{
+    border-right: none;
+}
+.bottom{
+    border-bottom: none;
+}
+
+/* Win Styles */
+
+p{
+    text-align: center;
+}
+
+.wins{
+    display: flex;
+    justify-content: space-evenly;
 }
