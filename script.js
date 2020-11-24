@@ -1,9 +1,10 @@
 "use strict";
 
 let turn = 0;
+let player = "X";
 let xWins = 0;
 let oWins = 0;
-let player = "X";
+
 
 document.getElementById("player").textContent = `Player: ${player}`;
 document.getElementById("turn").textContent = `Turn: ${turn}`;
@@ -35,9 +36,11 @@ let markBox = function (box){
     document.getElementById(box).classList.remove("on");
     document.getElementById(box).classList.add("off");
 
-    if(checkWin(player)){
-        youWin();
+    if(checkWin(player) == "win"){
+        setTimeout(youWin(), 1)
         return;
+    }else if(checkWin(player) == "tie"){
+        document.getElementById("winnerText").textContent = `TIE!`;
     }
 
 
@@ -47,9 +50,8 @@ let markBox = function (box){
     }else{
         document.getElementById("player").textContent = `Player: X`;
     }
-    
-    
     document.getElementById("turn").textContent = `Turn: ${turn}`;
+
 }
 
 function checkWin(sign){
@@ -64,8 +66,8 @@ function checkWin(sign){
             }
         }
         if(marks == 3){
-            console.log(`You Win`);
-            return true;
+            console.log(`${player} Wins!`);
+            return "win";
         }
     }
 
@@ -78,37 +80,51 @@ function checkWin(sign){
             }
         }
         if(marks == 3){
-            console.log(`You Win`);
-            return true;
+            console.log(`${player} Wins!`);
+            return "win";
         }
     }
 
     //Check for diagonal wins
     marks = 0;
     for(let row = 1; row < 4; row++){
-        
         if(document.getElementById(`${row}${row}`).textContent == sign){
             marks++;
         }
-        console.log(marks);
         if(marks == 3){
-            console.log(`You Win`);
-            return true;
+            console.log(`${player} Wins!`);
+            return "win";
         }
     }
     
     marks = 0;
+    let column = 1;
     for(let row = 3; row > 0; --row){
-        let column = 1;
-        if(document.getElementById(`${row}${column}`) == sign){
+        
+        if(document.getElementById(`${row}${column}`).textContent == sign){
             marks++;
         }
         column++;
         if(marks == 3){
-            console.log(`You Win`);
-            return true;
+            console.log(`${player} Wins!`);
+            return "win";
         }
     }
+
+    //check for ties
+    let markedBox = 0;
+    for(let i = 1; i < 4; i++){
+        for(let l = 1; l < 4; l++){
+            if(document.getElementById(`${i}${l}`).textContent){
+                markedBox++;
+            }
+        }
+    }
+    if(markedBox == 9){
+        return "tie";
+    }
+
+
     return false;
 }
 
@@ -121,19 +137,40 @@ function youWin(){
         document.getElementById(`oWins`).textContent = `O - ${oWins}`
     }
 
-    document.getElementById("11").onclick = function () {}
-    document.getElementById("12").onclick = function () {}
-    document.getElementById("13").onclick = function () {}
-    document.getElementById("21").onclick = function () {}
-    document.getElementById("22").onclick = function () {}
-    document.getElementById("23").onclick = function () {}
-    document.getElementById("31").onclick = function () {}
-    document.getElementById("32").onclick = function () {}
-    document.getElementById("33").onclick = function () {}
-
     let elemList = document.getElementsByClassName("on");
-    for(let elem = 0; elem < elemList; elem++){
+    for(let elem = 0; elem < elemList.length; elem++){
         elemList[elem].classList.add("off")
-        elemList[elem].classList.remove("on")
     }
+
+    for(let i = 1; i < 4; i++){
+        for(let l = 1; l < 4; l++){
+        document.getElementById(`${i}${l}`).onclick = function () {}
+        }
+    }
+
+    document.getElementById("winnerText").textContent = `${player} WINS!`;
 }
+
+
+function resetGame(){
+    turn = 0;
+    player = "X";
+    document.getElementById("player").textContent = `Player: ${player}`;
+    document.getElementById("turn").textContent = `Turn: ${turn}`;
+
+    let elemList = document.getElementsByClassName("square");
+    for(let elem = 0; elem < 9; elem++){
+        elemList[elem].classList.add("on");
+        elemList[elem].classList.remove("off");
+        elemList[elem].textContent = "";
+    }
+
+    for(let i = 1; i < 4; i++){
+        for(let l = 1; l < 4; l++){
+        document.getElementById(`${i}${l}`).onclick = function () {markBox(`${i}${l}`);}
+        }
+    }
+
+    document.getElementById("winnerText").textContent = `WINS`;
+}
+
