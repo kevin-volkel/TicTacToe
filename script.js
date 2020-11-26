@@ -28,9 +28,11 @@ let markBox = function (box){
     if(turn % 2 == 0){
         player = "X"
         document.getElementById(box).textContent = player;
+        document.getElementById(box).classList.add("xMark");
     }else{
         player = "O"
         document.getElementById(box).textContent = player;
+        document.getElementById(box).classList.add("oMark");
     }
 
     document.getElementById(box).classList.remove("on");
@@ -55,58 +57,94 @@ let markBox = function (box){
 }
 
 function checkWin(sign){
-    let marks;
+    let marks = 0;
+    let winningMarks = [];
 
     //Check for horizontal wins
     for(let row = 1; row < 4; row++){
+
         marks = 0;
+        winningMarks = [];
+
         for(let column = 1; column < 4; column++){
             if(document.getElementById(`${row}${column}`).textContent == sign){
                 marks++;
+                winningMarks.push(`${row}${column}`);
             }
         }
         if(marks == 3){
             console.log(`${player} Wins!`);
+
+            for(let i = 0; i < winningMarks.length; i++){
+                console.log(`${winningMarks[i]}`);
+                document.getElementById(winningMarks[i]).classList.add("winningMark")
+            }
+
             return "win";
         }
     }
 
     //Check for vertical wins
+    
     for(let column = 1; column < 4; column++){
         marks = 0;
+        winningMarks = [];
         for(let row = 1; row < 4; row++){
             if(document.getElementById(`${row}${column}`).textContent == sign){
                 marks++;
+                winningMarks.push(`${row}${column}`);
             }
         }
         if(marks == 3){
             console.log(`${player} Wins!`);
+
+            for(let i = 0; i < winningMarks.length; i++){
+                console.log(`${winningMarks[i]}`);
+                document.getElementById(winningMarks[i]).classList.add("winningMark")
+            }
+
             return "win";
         }
     }
 
     //Check for diagonal wins
+    winningMarks = [];
     marks = 0;
     for(let row = 1; row < 4; row++){
         if(document.getElementById(`${row}${row}`).textContent == sign){
+            winningMarks.push(`${row}${row}`);
             marks++;
         }
         if(marks == 3){
             console.log(`${player} Wins!`);
+
+            for(let i = 0; i < winningMarks.length; i++){
+                console.log(`${winningMarks[i]}`);
+                document.getElementById(winningMarks[i]).classList.add("winningMark")
+            }
+
             return "win";
         }
     }
     
+    winningMarks = [];
     marks = 0;
     let column = 1;
     for(let row = 3; row > 0; --row){
         
         if(document.getElementById(`${row}${column}`).textContent == sign){
+            winningMarks.push(`${row}${column}`);
             marks++;
         }
         column++;
         if(marks == 3){
             console.log(`${player} Wins!`);
+
+            for(let i = 0; i < winningMarks.length; i++){
+                console.log(`${winningMarks[i]}`);
+                document.getElementById(winningMarks[i]).classList.add("winningMark")
+            }
+
             return "win";
         }
     }
@@ -168,6 +206,9 @@ function resetGame(){
     for(let i = 1; i < 4; i++){
         for(let l = 1; l < 4; l++){
         document.getElementById(`${i}${l}`).onclick = function () {markBox(`${i}${l}`);}
+        document.getElementById(`${i}${l}`).classList.remove("winningMark");
+        document.getElementById(`${i}${l}`).classList.remove("xMark");
+        document.getElementById(`${i}${l}`).classList.remove("oMark");
         }
     }
 
